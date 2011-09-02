@@ -1,0 +1,38 @@
+= Stakk
+
+Some benefits of using Stakk versus other alternative callstack gems is that
+all the parsing is done lazy. If you only access the first line in the callstack,
+you only parse that one line.
+
+
+
+
+== Usage
+
+Use Stakk just like you would caller.
+
+  stakk             # get the callstack one up from here (just like caller
+                    # defaults to caller(1) )
+  stakk(1)          # same as above
+  stakk(2)          # line 2 and up
+  stakk( caller )   # same as stakk()
+  
+To pull lines out of the stack:
+
+  lines = stakk
+  lines[0]          # first line
+  lines[1..3]       # lines 1..3
+  
+To get data out of each line
+
+  lines = stakk
+  line = lines[0]
+  line.method       # Symbol representation of method or nil
+  line.path         # path to the file
+  line.pos          # position in the file
+  line.to_s         # the line in its original form
+  
+Nice shortcuts:
+
+  stakk[0].path     # file from first line
+  
